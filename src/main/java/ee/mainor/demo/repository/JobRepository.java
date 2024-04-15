@@ -20,4 +20,8 @@ public interface JobRepository extends CrudRepository<Job, Long> {
             """)
     List<Job> findAllByName(String name);
 
+    @Query("""
+            select * from job where name = :name;
+            """)
+    Job findByName(String name);
 }

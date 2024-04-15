@@ -42,7 +42,7 @@ public class EmployeeController {
     }
 
     @GetMapping("calc_salary")
-    public Integer calculate_salary(@RequestParam Long id){
+    public Double calculate_salary(@RequestParam Long id){
         return employeeService.calculate_salary(id);
     }
 

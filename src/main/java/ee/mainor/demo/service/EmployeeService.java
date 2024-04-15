@@ -4,7 +4,9 @@ import ee.mainor.demo.dto.CreateEmployeeRequest;
 import ee.mainor.demo.dto.EmployeeDTO;
 import ee.mainor.demo.mapper.EmployeeMapper;
 import ee.mainor.demo.model.Employee;
+import ee.mainor.demo.model.Job;
 import ee.mainor.demo.repository.EmployeeRepository;
+import ee.mainor.demo.repository.JobRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,6 +28,7 @@ public class EmployeeService {
 
 
     private final EmployeeRepository employeeRepository;
+    private final JobRepository jobRepository;
 
     public EmployeeDTO create(CreateEmployeeRequest createEmployeeRequest) {
         Employee employee = EmployeeMapper.toEntity(createEmployeeRequest);
@@ -60,18 +63,16 @@ public class EmployeeService {
 
     }
 
-    public Integer calculate_salary(Long id){
+    public Double calculate_salary(Long id){
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+
 
         if (optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
+            Job job = jobRepository.findByName(employee.getPosition());
 
-            Map<String, Integer> salaries = new HashMap<>();
-            salaries.put("Software Developer", 2000);
-            salaries.put("Manager", 1800);
-            salaries.put("Project Manager", 2500);
 
-            return employee.getAge() * salaries.getOrDefault(employee.getPosition(), 0); // Handle case where position is not found
+            return ((employee.getAge()*0.01) +1)*job.getSalary(); // Handle case where position is not found
         } else {
             throw new RuntimeException("Employee not found with id: " + id);
         }
