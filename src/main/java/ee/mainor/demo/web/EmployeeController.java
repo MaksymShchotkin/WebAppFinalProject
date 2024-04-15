@@ -41,8 +41,8 @@ public class EmployeeController {
         return employeeService.getAll();
     }
 
-    @GetMapping("calc_salary")
-    public Double calculate_salary(@RequestParam Long id){
+    @GetMapping("calc-salary")
+    public Double calculateSalary(@RequestParam Long id){
         return employeeService.calculate_salary(id);
     }
 

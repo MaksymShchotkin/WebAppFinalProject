@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1><u>Title</u></h1>
+<div class="container">
+    <div id="counter">0</div>
+    <button onclick="subtractOne()">-1</button>
+    <button onclick="addOne()">+1</button>
+</div>
+
+<a href="https://www.google.com">link</a>
+
+<H1 style="color:yellow">Yellow</H1>
+
+
+<script>
+    let counter = 0;
+
+    function updateCounter() {
+        document.getElementById("counter").innerText = counter;
+    }
+
+    function addOne() {
+        counter++;
+        updateCounter();
+    }
+
+    function subtractOne() {
+        counter--;
+        updateCounter();
+    }
+</script>
+</body>
+</html>
