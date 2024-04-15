@@ -9,10 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @Service
@@ -54,6 +58,23 @@ public class EmployeeService {
                 .map(EmployeeMapper::toDTO)
                 .toList();
 
+    }
+
+    public Integer calculate_salary(Long id){
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+
+            Map<String, Integer> salaries = new HashMap<>();
+            salaries.put("Software Developer", 2000);
+            salaries.put("Manager", 1800);
+            salaries.put("Project Manager", 2500);
+
+            return employee.getAge() * salaries.getOrDefault(employee.getPosition(), 0); // Handle case where position is not found
+        } else {
+            throw new RuntimeException("Employee not found with id: " + id);
+        }
     }
 
 

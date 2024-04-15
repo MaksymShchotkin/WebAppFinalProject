@@ -3,19 +3,6 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="nikita.ojamae" id="init-schema">
-        <sql splitStatements="false">
-            CREATE TABLE product
-            (
-                id          SERIAL PRIMARY KEY,
-                name        varchar(255) NOT NULL,
-                price       integer,
-                description varchar(255),
-                currency    varchar(3),
-                created_at  timestamp DEFAULT NOW()
-            );
-        </sql>
-    </changeSet>
 
     <changeSet author="maksym.shchotkin" id="create-employee-table">
         <sql splitStatements="false">
@@ -24,6 +11,18 @@
                 id          SERIAL PRIMARY KEY,
                 name        varchar(255) NOT NULL,
                 position    varchar(255) NOT NULL,
+                age         integer,
+                salary      integer
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet author="maksym.shchotkin" id="create-jobs-table">
+        <sql splitStatements="false">
+            CREATE TABLE job
+            (
+                id          SERIAL PRIMARY KEY,
+                name        varchar(255) NOT NULL,
                 age         integer,
                 salary      integer
             );

@@ -41,6 +41,11 @@ public class EmployeeController {
         return employeeService.getAll();
     }
 
+    @GetMapping("calc_salary")
+    public Integer calculate_salary(@RequestParam Long id){
+        return employeeService.calculate_salary(id);
+    }
+
     @PutMapping
     public EmployeeDTO update(@RequestBody UpdateEmployeeRequest request) {
         return null;
